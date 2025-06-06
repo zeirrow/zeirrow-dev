@@ -46,6 +46,7 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
+  themeColor: "#0a0a0a",
 };
 
 export default function RootLayout({ children }) {

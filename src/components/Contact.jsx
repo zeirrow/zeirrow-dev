@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const baseUrl =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://zeirrow-dev-jz8c.vercel.app";
+    : "https://zeirrow-dev-six.vercel.app/";
 
 const Contact = () => {
   const [status, setStatus] = useState("idle"); // idle, 'success', 'error'

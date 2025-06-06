@@ -3,6 +3,7 @@ import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import { projects } from "../../data/data";
 import Link from "next/link";
+import { truncate } from "../utils/helper";
 
 const ProjectSection = () => {
   // Ensure projects data is available
@@ -95,8 +96,10 @@ const ProjectSection = () => {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-400 mb-4">{project.description}</p>
+                <h3 className="text-xl font-bold mb-2">{truncate(project.title, 20)}</h3>
+                <p className="text-gray-400 mb-4">
+                  {truncate(project.description, 70)}
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech) => (
                     <span
@@ -113,14 +116,13 @@ const ProjectSection = () => {
         </div>
 
         <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        viewport={{ once: true }}
-        className="mt-12 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center"
         >
-          <Link
-            href="/projects">
+          <Link href="/projects">
             <span className="text-cyan-400 hover:underline">
               View All Projects
             </span>

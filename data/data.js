@@ -14,7 +14,8 @@ import {
   SiPostman,
   SiRedux,
 } from "react-icons/si";
-const github = "https://github.com/Udodirim5";
+const github = "https://github.com/zeirrow";
+let projectId;
 
 export const myInfo = {
   name: "Nnodimele Udodirim",
@@ -27,7 +28,7 @@ export const myInfo = {
   contact: {
     email: "udodirimwisdom@gmail.com",
     phone: "2349033951020",
-    github: "udodirim5",
+    github: "zeirrow",
     linkedIn: "https://www.linkedin.com/in/udodirim-nnodimele-814b5a287",
     twitter: "https://twitter.com/udodirim101",
   },
@@ -50,7 +51,25 @@ export const skills = [
 
 export const projects = [
   {
-    id: 1,
+    id: projectId++,
+    title: "Cinemate | Movie Discovery Platform",
+    description:`A sleek movie discovery platform that enables users to browse, search, and explore a wide range of films. Built with React and styled using Tailwind CSS, it offers a responsive and intuitive user interface.`,
+    tech: ["React", "Tailwind", "TMDb API"],
+    github: `${github}/cinemate`,
+    live: "https://cinemate-sepia.vercel.app",
+    screenshot: "/screenshots/cinemate.png",
+  },
+  {
+    id: projectId++,
+    title: "Lumina",
+    description:`A modern web application designed to showcase innovative UI components and responsive layouts. Developed using React and Vite, it emphasizes performance optimization and clean design principles.`,
+    tech: ["React", "Tailwind"],
+    github: `${github}/lumina`,
+    live: "https://lumina-jade.vercel.app/",
+    screenshot: "/screenshots/lumina.png",
+  },
+  {
+    id: projectId++,
     title: "Code To Video ",
     description:
       "Convert code text into MP4 videos with typing animation and syntax highlighting.",
@@ -60,7 +79,7 @@ export const projects = [
     screenshot: "/screenshots/code2video.png",
   },
   {
-    id: 2,
+    id: projectId++,
     title: "Task Flow | Task Management App",
     description:
       "A productivity application for organizing tasks with drag-and-drop functionality and team collaboration features.",
@@ -70,13 +89,13 @@ export const projects = [
     screenshot: "/screenshots/taskFlow.png",
   },
   {
-    id: 3,
+    id: projectId++,
     title: "Pizza Delivery App",
     description:
       "Frontend that fetches pizza menu from backend API and sends orders via POST requests.",
     tech: ["React", "API Integration", "Tailwind", "Redux"],
     github: `${github}/pizza-delivery`,
-    live: "https://udodirim5.github.io/pizza-delivery/",
+    live: "https://pizza-menu-app-bay.vercel.app/",
     screenshot: "/screenshots/fast-pizza.png",
   },
 ];
