@@ -35,6 +35,7 @@ const Header = ({ activeSection }) => {
     >
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
+                <Link href="/" className="flex items-center space-x-2">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -43,6 +44,7 @@ const Header = ({ activeSection }) => {
         >
           <span className="font-light">{name}</span>.{ext}
         </motion.div>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">

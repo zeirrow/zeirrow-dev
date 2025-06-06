@@ -9,3 +9,17 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: #101828;
 }
+
+@keyframes spinGradient {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+.animate-spin-gradient {
+  animation: spinGradient 10s linear infinite;
+}
