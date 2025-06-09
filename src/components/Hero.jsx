@@ -3,15 +3,21 @@ import { FiDownload } from "react-icons/fi";
 import { myInfo } from "../../data/data";
 import Image from "next/image";
 import { useState } from "react";
+import BlurText from "../ui/buildKeyframes";
+import Link from "next/link";
 const Hero = () => {
-  const [imgSrc, setImgSrc] = useState(myInfo.image);
+  const [imgSrc, setImgSrc] = useState(myInfo.mobImage);
+
+  const handleAnimationComplete = () => {
+    console.log("Animation completed!");
+  };
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 "
     >
-      <div className="container mx-auto px-6 py-20 flex flex-col items-center text-center">
+      <div className="container mx-auto px-6 py-20 flex flex-col items-center text-center z-[100]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -21,8 +27,8 @@ const Hero = () => {
           <div className="w-32 h-32 rounded-full border-4 border-cyan-400/30 bg-gray-800 flex items-center justify-center overflow-hidden">
             <div
               className="relative w-full h-full bg-gradient-to-br from-cyan-400/20 to-blue-600/20 animate-pulse"
-              onMouseEnter={() => setImgSrc(myInfo.art)}
-              onMouseLeave={() => setImgSrc(myInfo.image)}
+              onMouseEnter={() => setImgSrc(myInfo.mobArt)}
+              onMouseLeave={() => setImgSrc(myInfo.mobImage)}
             >
               <motion.div
                 key={imgSrc} // this triggers re-animation when src changes
@@ -47,11 +53,15 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-3xl md:text-6xl font-bold mb-4"
         >
-          <span className="via-purple-600 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
-            {myInfo.name}
-          </span>
+          <BlurText
+            text={myInfo.name}
+            delay={150}
+            animateBy="words"
+            direction="top"
+            onAnimationComplete={handleAnimationComplete}
+            className="text-2xl mb-8"
+          />
         </motion.h1>
 
         <motion.p
@@ -93,14 +103,16 @@ const Hero = () => {
           </motion.a>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
-        >
-          <div className="w-8 h-8 border-b-2 border-r-2 border-cyan-400 rotate-45"></div>
-        </motion.div>
+        <Link href="#projects" aria-label="Scroll to Projects" >
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+          >
+            <div className="w-8 h-8 border-b-2 border-r-2 border-cyan-400 rotate-45"></div>
+          </motion.div>
+        </Link>
       </div>
     </section>
   );

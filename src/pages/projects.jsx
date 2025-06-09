@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 const Projects = () => {
   return (
     <>
-    <GlobalHeader />
+      <GlobalHeader />
       <section id="projects" className="bg-[#101828] overflow-x-hidden">
         <div className="container mx-auto pt-28 px-4 py-16 md:py-24">
           <motion.div
@@ -28,11 +28,16 @@ const Projects = () => {
 
           <div className="flex flex-col gap-8 md:gap-12">
             {projects.map((project) => (
-              <ProjectCard
+              <motion.div
                 key={project.id}
-                project={project}
-                index={project.id}
-              />
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: project.id * 0.1 }}
+                exit={{ opacity: 0, y: 50 }}
+              >
+                <ProjectCard project={project} index={project.id} />
+              </motion.div>
             ))}
           </div>
         </div>

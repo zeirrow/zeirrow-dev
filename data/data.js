@@ -15,12 +15,14 @@ import {
   SiRedux,
 } from "react-icons/si";
 const github = "https://github.com/zeirrow";
-let projectId;
+export let projectId = 0;
 
 export const myInfo = {
   name: "Nnodimele Udodirim",
   image: "/images/udodirim.jpg",
   art: "/images/udodirim-art.jpg",
+  mobImage: "/images/mob-udo.jpg",
+  mobArt: "/images/mob-udo-art.jpg",
   id: 1,
   title: "Frontend Developer",
   description: `Motivated and self-taught frontend developer with hands-on experience building responsive and interactive web applications. Passionate about turning ideas into functional, user-friendly interfaces. Eager to contribute to a professional development team and grow through real-world challenges.`,
@@ -29,7 +31,7 @@ export const myInfo = {
     email: "udodirimwisdom@gmail.com",
     phone: "2349033951020",
     github: "zeirrow",
-    linkedIn: "https://www.linkedin.com/in/udodirim-nnodimele-814b5a287",
+    linkedIn: "https://www.linkedin.com/in/zeirrow",
     twitter: "https://twitter.com/udodirim101",
   },
 };

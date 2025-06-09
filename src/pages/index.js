@@ -4,14 +4,19 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import DesktopHero from "@/components/DesktopHero";
 import ProjectSection from "@/components/ProjectSection";
-import Testimonials from "../components/Testimonials";
+import Testimonials from "@/components/Testimonials";
+import useMediaQuery from "../hooks/useMediaQuery";
+import Waves from "../ui/Wave";
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
 
-  // Scroll listener for section highlighting
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  // Section scroll tracking
   useEffect(() => {
     const handleScroll = () => {
       const sections = ["home", "projects", "about", "contact"];
@@ -49,12 +54,29 @@ const Home = () => {
         darkMode={darkMode}
         setDarkMode={setDarkMode}
       />
-      <Hero />
+
+      {/* Conditionally render hero based on screen size */}
+      {isDesktop ? <DesktopHero /> : <Hero />}
+
       <ProjectSection />
       <About />
       <Testimonials />
       <Contact />
       <Footer />
+
+      <Waves
+        lineColor="#fff"
+        backgroundColor="rgba(255, 255, 255, 0.2)"
+        waveSpeedX={0.02}
+        waveSpeedY={0.01}
+        waveAmpX={40}
+        waveAmpY={20}
+        friction={0.9}
+        tension={0.01}
+        maxCursorMove={120}
+        xGap={12}
+        yGap={36}
+      />
     </div>
   );
 };
