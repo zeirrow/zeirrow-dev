@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { myInfo } from "../../data/data";
+import { allSections, myInfo } from "../../data/data";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import Link from "next/link";
 
@@ -48,7 +48,7 @@ const Header = ({ activeSection }) => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">
-          {["home", "projects", "about", "contact"].map((item) => (
+          {allSections.map((item) => (
             <motion.a
               key={item}
               href={`#${item}`}
@@ -106,7 +106,7 @@ const Header = ({ activeSection }) => {
               className="md:hidden absolute top-full left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800"
             >
               <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
-                {["home", "projects", "about", "contact"].map((item) => (
+                {allSections.map((item) => (
                   <motion.a
                     key={item}
                     href={`#${item}`}

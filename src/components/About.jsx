@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { experience, skills } from "../../data/data";
+import SortableSkillsGrid from "./SkillsGrid";
 
 const About = () => {
   return (
@@ -74,18 +75,7 @@ const About = () => {
               development world. Here are my core competencies:
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {skills.map(({ name, icon: Icon, color }, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ y: -5 }}
-                  className="flex flex-col items-center p-4 bg-gray-800/50 rounded-lg border border-gray-800 hover:border-cyan-400/30 transition-colors"
-                >
-                  <Icon className="text-4xl" style={{ color }} />
-                  <span className="mt-2 text-sm">{name}</span>
-                </motion.div>
-              ))}
-            </div>
+            <SortableSkillsGrid initialSkills={skills} />
           </motion.div>
         </div>
       </div>

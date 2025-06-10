@@ -15,7 +15,10 @@ import {
   SiRedux,
 } from "react-icons/si";
 const github = "https://github.com/zeirrow";
-export let projectId = 0;
+
+export const allSections = ["home", "projects", "about", "faqs", "contact"];
+
+let projectId = 0;
 
 export const myInfo = {
   name: "Nnodimele Udodirim",
@@ -55,7 +58,7 @@ export const projects = [
   {
     id: projectId++,
     title: "Cinemate | Movie Discovery Platform",
-    description:`A sleek movie discovery platform that enables users to browse, search, and explore a wide range of films. Built with React and styled using Tailwind CSS, it offers a responsive and intuitive user interface.`,
+    description: `A sleek movie discovery platform that enables users to browse, search, and explore a wide range of films. Built with React and styled using Tailwind CSS, it offers a responsive and intuitive user interface.`,
     tech: ["React", "Tailwind", "TMDb API"],
     github: `${github}/cinemate`,
     live: "https://cinemate-sepia.vercel.app",
@@ -64,7 +67,7 @@ export const projects = [
   {
     id: projectId++,
     title: "Lumina",
-    description:`A modern web application designed to showcase innovative UI components and responsive layouts. Developed using React and Vite, it emphasizes performance optimization and clean design principles.`,
+    description: `A modern web application designed to showcase innovative UI components and responsive layouts. Developed using React and Vite, it emphasizes performance optimization and clean design principles.`,
     tech: ["React", "Tailwind"],
     github: `${github}/lumina`,
     live: "https://lumina-jade.vercel.app/",
@@ -171,5 +174,40 @@ export const testimonials = [
   },
 ];
 
-
-
+export const faqs = [
+  {
+    question: "What technologies do you specialize in?",
+    answer:
+      "I primarily work with modern web technologies including React, TypeScript, and TailwindCSS for building responsive, performant interfaces. For advanced visual effects, I incorporate GSAP for animations and Three.js for 3D elements when the project requires that extra dimension.",
+  },
+  {
+    question: "Are you available for freelance or contract work?",
+    answer:
+      "Yes, I selectively take on freelance projects that align with my skills and interests. I particularly enjoy collaborations that involve creative problem-solving, innovative design, or technical challenges that push boundaries.",
+  },
+  {
+    question: "Where can I view your professional background?",
+    answer:
+      "You'll find my detailed resume in the dedicated Resume section of this portfolio. For additional context or specific inquiries, feel free to use the Contact form - I'm happy to provide more information.",
+  },
+  {
+    question: "What's the best way to get in touch?",
+    answer:
+      "The Contact section contains a direct messaging form, or you can connect via LinkedIn. I typically respond to professional inquiries within 24 hours during weekdays.",
+  },
+  {
+    question: "What types of projects do you typically work on?",
+    answer:
+      "I focus on creating modern web applications with exceptional user experiences. My projects range from responsive marketing sites to complex web apps, always with an emphasis on clean code, intuitive interfaces, and thoughtful interactions.",
+  },
+  {
+    question: "Do you collaborate with other developers or designers?",
+    answer:
+      "Absolutely. Some of my best work comes from collaborations with talented designers, developers, and creative professionals. I value teamwork and the unique perspectives it brings to projects.",
+  },
+  {
+    question: "How do you approach new projects?",
+    answer:
+      "Every project begins with understanding the core objectives and user needs. I then develop a tailored solution balancing technical feasibility, visual appeal, and performance considerations - always keeping maintainability and scalability in mind.",
+  },
+];
