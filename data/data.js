@@ -14,7 +14,8 @@ import {
   SiPostman,
   SiRedux,
 } from "react-icons/si";
-const github = "https://github.com/zeirrow";
+
+export const github = "https://github.com/zeirrow";
 
 export const allSections = ["home", "projects", "about", "faqs", "contact"];
 
@@ -57,6 +58,24 @@ export const skills = [
 export const projects = [
   {
     id: projectId++,
+    title: "Plumbing Solutions That Flow",
+    description: "A slick landing page for a plumbing company.",
+    tech: ["React", "Tailwind"],
+    github: `${github}/plumber`,
+    live: "https://plumber-kappa.vercel.app/",
+    screenshot: "/screenshots/plumber-1.png",
+  },
+  {
+    id: projectId++,
+    title: "Your Plumber",
+    description: "A slick landing page for a plumbing company.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    github: `${github}/plumber-2`,
+    live: "https://zeirrow.github.io/plumber-2",
+    screenshot: "/screenshots/plumber-2.png",
+  },
+  {
+    id: projectId++,
     title: "Cinemate | Movie Discovery Platform",
     description: `A sleek movie discovery platform that enables users to browse, search, and explore a wide range of films. Built with React and styled using Tailwind CSS, it offers a responsive and intuitive user interface.`,
     tech: ["React", "Tailwind", "TMDb API"],
@@ -79,7 +98,7 @@ export const projects = [
     description:
       "Convert code text into MP4 videos with typing animation and syntax highlighting.",
     tech: ["React", "Tailwind", "CodeMirror"],
-    github: `${github}/code-to-video`,
+    github: `${github}/codetovideo`,
     live: "https://code-to-video.vercel.app/",
     screenshot: "/screenshots/code2video.png",
   },
