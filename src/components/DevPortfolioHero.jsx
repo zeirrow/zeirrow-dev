@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useMemo, useCallback } from "react";
 import {
   LuGithub,
   LuLinkedin,
@@ -10,126 +10,69 @@ import {
   LuExternalLink,
 } from "react-icons/lu";
 import { github, myInfo, projects } from "../../data/data";
-import { DiCss3Full, DiHtml5 } from "react-icons/di";
-import { FaReact } from "react-icons/fa6";
-import { SiTypescript, SiJavascript } from "react-icons/si";
-import { FaNodeJs } from "react-icons/fa";
 import { IoStatsChartSharp } from "react-icons/io5";
 
-const yearsOfExperience = new Date().getFullYear() - 2023;
-const numOfProjects = projects.length;
-
 const DevPortfolioHero = () => {
+  // Memoize these values since they don't change
+  const yearsOfExperience = useMemo(() => new Date().getFullYear() - 2023, []);
+  const numOfProjects = useMemo(() => projects.length, []);
+  const [firstName, lastName] = useMemo(() => myInfo.name.split(" "), []);
+  const { email, linkedIn, twitter } = useMemo(() => myInfo.contact, []);
+
+  // State
   const [imgSrc, setImgSrc] = useState(myInfo.mobImage);
   const [isHovering, setIsHovering] = useState(false);
-  const [angle, setAngle] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    setIsVisible(true);
+  // Social links - memoized
+  const socialLinks = useMemo(
+    () => [
+      { icon: <LuGithub size={20} />, href: github },
+      { icon: <LuLinkedin size={20} />, href: linkedIn },
+      { icon: <LuMail size={20} />, href: `mailto:${email}` },
+      { icon: <LuTwitter size={20} />, href: twitter },
+    ],
+    [email, github, linkedIn, twitter]
+  );
 
-    const interval = setInterval(() => {
-      setAngle((prev) => (prev + 0.5) % 360);
-    }, 50);
+  // Stats data - memoized
+  const stats = useMemo(
+    () => [
+      {
+        value: `${yearsOfExperience}+`,
+        label: "Years Experience",
+        color: "text-blue-400",
+      },
+      {
+        value: <JScript />,
+        label: "Main Language",
+        color: "text-green-50",
+      },
+      {
+        value: `Over ${numOfProjects}`,
+        label: "Projects",
+        color: "text-purple-400",
+      },
+      { value: "🟢", label: "Available", color: "text-green-400" },
+    ],
+    [yearsOfExperience, numOfProjects]
+  );
 
-    return () => clearInterval(interval);
+  // Handlers - memoized
+  const handleMouseEnter = useCallback(() => {
+    setImgSrc(myInfo.mobArt);
+    setIsHovering(true);
   }, []);
 
-  const [firstName, lastName] = myInfo.name.split(" ");
-  const { email, linkedIn, twitter } = myInfo.contact;
-
-  // Tech icons data with colors and sizes
-  const techIcons = [
-    {
-      icon: <DiHtml5 size={24} />,
-      color: "bg-orange-500",
-      size: "w-12 h-12",
-      orbitRadius: 120,
-    },
-    {
-      icon: <DiCss3Full size={24} />,
-      color: "bg-blue-500",
-      size: "w-12 h-12",
-      orbitRadius: 140,
-    },
-    {
-      icon: <SiJavascript size={24} />,
-      color: "bg-yellow-500",
-      size: "w-12 h-12",
-      orbitRadius: 160,
-      textColor: "text-black",
-    },
-    {
-      icon: <FaReact size={24} />,
-      color: "bg-cyan-500",
-      size: "w-12 h-12",
-      orbitRadius: 180,
-    },
-    {
-      icon: <FaNodeJs size={20} />,
-      color: "bg-green-500",
-      size: "w-10 h-10",
-      orbitRadius: 100,
-    },
-    {
-      icon: <SiTypescript size={20} />,
-      color: "bg-purple-500",
-      size: "w-10 h-10",
-      orbitRadius: 220,
-    },
-  ];
-
-  // Calculate icon positions based on angle
-  const getIconPosition = (index, radius) => {
-    const offsetAngle = index * (360 / techIcons.length) + angle;
-    const radian = (offsetAngle * Math.PI) / 180;
-    return {
-      x: Math.cos(radian) * radius,
-      y: Math.sin(radian) * radius,
-    };
-  };
+  const handleMouseLeave = useCallback(() => {
+    setImgSrc(myInfo.mobImage);
+    setIsHovering(false);
+  }, []);
 
   return (
     <div
       id="home"
       className="relative min-h-screen bg-gray-900 text-white mt-10 overflow-hidden"
     >
-      {/* Hero Section */}
-
-      {/* Orbiting Tech Icons */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        {techIcons.map((tech, index) => {
-          const { x, y } = getIconPosition(index, tech.orbitRadius);
-          return (
-            <motion.div
-              key={index}
-              className={`absolute ${tech.color} ${tech.size} rounded-full flex items-center justify-center shadow-lg ${tech.textColor || "text-white"}`}
-              style={{
-                x,
-                y,
-              }}
-              animate={{
-                x,
-                y,
-                rotate: 360,
-                transition: {
-                  repeat: Infinity,
-                  duration: 20,
-                  ease: "linear",
-                },
-              }}
-              whileHover={{
-                scale: 1.2,
-                boxShadow: "0 0 20px rgba(255,255,255,0.5)",
-                transition: { duration: 0.2 },
-              }}
-            >
-              {tech.icon}
-            </motion.div>
-          );
-        })}
-      </div>
-
       <div className="absolute inset-0 backdrop-blur-[2px] bg-opacity-90 border-b border-gray-800" />
       <div className="relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between px-4 md:px-8 lg:px-16 py-8 lg:py-16 space-y-8 lg:space-y-0">
@@ -181,7 +124,7 @@ const DevPortfolioHero = () => {
             </motion.h2>
 
             <motion.p
-              className="text-gray-400 text-lg mb-8 leading-relaxed backdrop-blur-md bg-opacity-90 border-b border-gray-800 "
+              className="text-gray-400 text-lg mb-8 leading-relaxed backdrop-blur-md bg-opacity-90 border-b border-gray-800"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.8 }}
@@ -200,12 +143,7 @@ const DevPortfolioHero = () => {
             >
               <span className="text-gray-400 text-sm">Let's connect:</span>
               <div className="flex space-x-3">
-                {[
-                  { icon: <LuGithub size={20} />, href: github },
-                  { icon: <LuLinkedin size={20} />, href: linkedIn },
-                  { icon: <LuMail size={20} />, href: `mailto:${email}` },
-                  { icon: <LuTwitter size={20} />, href: twitter },
-                ].map((social, index) => (
+                {socialLinks.map((social, index) => (
                   <motion.a
                     key={index}
                     href={social.href}
@@ -271,14 +209,8 @@ const DevPortfolioHero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="flex-1 flex justify-center lg:justify-end relative"
-            onMouseEnter={() => {
-              setImgSrc(myInfo.mobArt);
-              setIsHovering(true);
-            }}
-            onMouseLeave={() => {
-              setImgSrc(myInfo.mobImage);
-              setIsHovering(false);
-            }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
               {/* Profile Image */}
@@ -302,6 +234,8 @@ const DevPortfolioHero = () => {
                     alt="profile"
                     className="w-full h-full object-cover"
                     fill
+                    priority
+                    sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 384px"
                   />
                 </motion.div>
               </AnimatePresence>
@@ -361,30 +295,13 @@ const DevPortfolioHero = () => {
                 },
               }}
             >
-              <IoStatsChartSharp/>
+              <IoStatsChartSharp />
             </motion.span>
             <h3 className="text-lg font-semibold">Quick Stats:</h3>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              {
-                value: `${yearsOfExperience}+`,
-                label: "Years Experience",
-                color: "text-blue-400",
-              },
-              {
-                value: <JScript />,
-                label: "Main Language",
-                color: "text-green-50",
-              },
-              {
-                value: `Over ${numOfProjects}`,
-                label: "Projects",
-                color: "text-purple-400",
-              },
-              { value: "🟢", label: "Available", color: "text-green-400" },
-            ].map((stat, index) => (
+            {stats.map((stat, index) => (
               <motion.div
                 key={index}
                 className="bg-gray-800 rounded-lg p-4 text-center hover:bg-gray-700 transition-colors cursor-default"
@@ -424,8 +341,6 @@ const DevPortfolioHero = () => {
   );
 };
 
-export default DevPortfolioHero;
-
 const JScript = () => {
   return (
     <>
@@ -434,3 +349,5 @@ const JScript = () => {
     </>
   );
 };
+
+export default DevPortfolioHero;
