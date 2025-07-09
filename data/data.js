@@ -126,14 +126,14 @@ export const projects = [
 
 export const experience = [
   {
-    year: "2022 - Present",
+    year: "2024 - Present",
     title: "Freelance Frontend Developer",
     company: "Zierrow.dev",
     description:
       "Developed responsive web applications using React, Next.js, and Tailwind CSS. Collaborated with clients to deliver high-quality projects on time.",
   },
   {
-    year: "2019 - 2022",
+    year: "2023 - 2024",
     title: "Frontend Developer",
     company: "Digital Solutions",
     description: "Built responsive UIs and implemented design systems.",
