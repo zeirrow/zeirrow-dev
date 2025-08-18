@@ -5,6 +5,7 @@ import {
   FaReact,
   FaGitAlt,
   FaNodeJs,
+  FaWordpress,
 } from "react-icons/fa";
 import { RiNextjsFill } from "react-icons/ri";
 import {
@@ -46,6 +47,7 @@ export const skills = [
   { name: "JavaScript", icon: FaJsSquare, color: "#F0DB4F" },
   { name: "Tailwind CSS", icon: SiTailwindcss, color: "#38B2AC" },
   { name: "React", icon: FaReact, color: "#61DBFB" },
+  { name: "React Native", icon: FaReact, color: "#61DBFB" },
   { name: "Next.js", icon: RiNextjsFill, color: "#000000" },
   { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
   { name: "Redux", icon: SiRedux, color: "#764ABC" },
@@ -53,6 +55,7 @@ export const skills = [
   { name: "Express js", icon: SiExpress, color: "#000000" },
   { name: "Git", icon: FaGitAlt, color: "#F1502F" },
   { name: "REST APIs", icon: SiPostman, color: "#FF6C37" },
+  { name: "WordPress", icon: FaWordpress, color: "#21759B" },
 ];
 
 export const projects = [
