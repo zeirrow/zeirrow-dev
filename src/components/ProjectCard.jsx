@@ -67,6 +67,16 @@ const ProjectCard = ({ project, index }) => {
               </span>
             ))}
           </div>
+          <div className="flex gap-4">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${project.title}`}
+            className="text-cyan-400 hover:text-cyan-300 transition-colors duration-200 font-medium inline-flex items-center gap-1"
+          >
+            GitHub Repo
+          </a>
           <a
             href={project.live}
             target="_blank"
@@ -76,6 +86,7 @@ const ProjectCard = ({ project, index }) => {
           >
             View Project →
           </a>
+        </div>
         </div>
 
         {/* Right Image */}

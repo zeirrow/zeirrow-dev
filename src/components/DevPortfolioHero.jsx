@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import {
   LuGithub,
   LuLinkedin,
@@ -22,6 +22,7 @@ const DevPortfolioHero = () => {
   // State
   const [imgSrc, setImgSrc] = useState(myInfo.mobImage);
   const [isHovering, setIsHovering] = useState(false);
+  const [forceDownload, setForceDownload] = useState(false);
 
   // Social links - memoized
   const socialLinks = useMemo(
@@ -68,6 +69,16 @@ const DevPortfolioHero = () => {
     setIsHovering(false);
   }, []);
 
+  const handleResumeClick = (e) => {
+    if (e.shiftKey) {
+      // If Shift is held, force download
+      setForceDownload(true);
+    } else {
+      // If normal click, just open the PDF
+      setForceDownload(false);
+    }
+  };
+
   return (
     <div
       id="home"
@@ -84,7 +95,7 @@ const DevPortfolioHero = () => {
             className="flex-1 text-center lg:text-left max-w-2xl"
           >
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+              className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium mb-4"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -184,22 +195,30 @@ const DevPortfolioHero = () => {
                 <LuExternalLink size={18} />
                 <span>Explore My Projects</span>
               </motion.a>
-              <motion.a
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 0 15px rgba(34, 211, 238, 0.5)",
-                  backgroundColor: "rgba(31, 41, 55, 0.8)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                href="/files/resume.pdf"
-                download
-                target="_blank"
-                className="flex items-center justify-center space-x-2 px-6 py-3 border border-gray-600 hover:bg-gray-800 rounded-lg transition-colors"
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <LuDownload size={18} />
-                <span>Download My CV</span>
-              </motion.a>
+              <div className="relative group inline-block">
+                <motion.a
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 0 15px rgba(34, 211, 238, 0.5)",
+                    backgroundColor: "rgba(31, 41, 55, 0.8)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  href="/files/resume.pdf"
+                  target="_blank"
+                  download={forceDownload ? true : undefined}
+                  onClick={handleResumeClick}
+                  className="flex items-center justify-center space-x-2 px-6 py-3 border border-gray-600 hover:bg-gray-800 rounded-lg transition-colors"
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <LuDownload size={18} />
+                  <span className="hidden md:block">{forceDownload ? "Download": "See"} my resume!</span>
+                  <span className="md:hidden">See resume!</span>
+                </motion.a>
+                {/* Tooltip */}
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:md:block bg-gray-800 text-white text-xs px-2 py-1 rounded-md whitespace-nowrap">
+                  Hold Shift + Click to download
+                </span>
+              </div>
             </motion.div>
           </motion.div>
 
