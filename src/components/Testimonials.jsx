@@ -1,8 +1,16 @@
-import { motion, AnimatePresence } from "framer-motion";
+
+"use client";
+import { motion } from "framer-motion";
 import { useState } from "react";
-import Image from "next/image";
 import { testimonials } from "../../data/data";
 import Link from "next/link";
+import TestimonyCard from "./TestimonyCard";
+
+// Import Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
 const Testimonials = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -44,64 +52,28 @@ const Testimonials = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Swiper Carousel */}
+        <Swiper
+          spaceBetween={24}
+          pagination={{ clickable: true }}
+          modules={[Pagination]}
+          breakpoints={{
+            0: { slidesPerView: 1 }, // Mobile
+            768: { slidesPerView: 2 }, // Tablet
+            1024: { slidesPerView: 3 }, // Desktop
+          }}
+        >
           {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className={`relative p-8 rounded-2xl ${testimonial.color} border border-gray-800/50 hover:border-cyan-400/30 transition-all duration-300 h-full`}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              {/* Client work image that appears on hover */}
-              <AnimatePresence>
-                {hoveredIndex === index && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-                    animate={{
-                      opacity: 1,
-                      scale: 1,
-                      rotate: [0, 3, -2, 0], // Playful wiggle
-                      x: [0, 5, -5, 0],
-                      y: [0, -10, 0],
-                    }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{
-                      duration: 0.6,
-                      ease: "backOut",
-                    }}
-                    className="absolute -top-8 -right-8 w-48 h-32 rounded-xl overflow-hidden shadow-2xl border-2 border-white/20"
-                  >
-                    <Image
-                      src={testimonial.image}
-                      fill
-                      alt={`Work for ${testimonial.name}`}
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div className="relative z-10">
-                <span className="text-4xl mb-4 block">{testimonial.emoji}</span>
-                <p className="text-gray-300 text-lg italic mb-6">
-                  "{testimonial.quote}"
-                </p>
-                <div>
-                  <h4 className="font-bold text-white">{testimonial.name}</h4>
-                  <p className="text-cyan-400 text-sm">{testimonial.role}</p>
-                </div>
-              </div>
-
-              {/* Decorative accent */}
-              <div className="absolute bottom-0 right-0 w-16 h-16 rounded-tl-full bg-cyan-500/10" />
-            </motion.div>
+            <SwiperSlide key={index}>
+              <TestimonyCard
+                testimonial={testimonial}
+                index={index}
+                setHoveredIndex={setHoveredIndex}
+                hoveredIndex={hoveredIndex}
+              />
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
 
         {/* Floating CTA */}
         <motion.div

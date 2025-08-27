@@ -20,8 +20,8 @@ export const github = "https://github.com/zeirrow";
 
 export const allSections = [
   "home",
-  "projects",
   "about",
+  "projects",
   "faqs",
   "contact",
   "blog",
