@@ -11,7 +11,7 @@ const Projects = () => {
     <>
       <GlobalHeader />
       <section id="projects" className="bg-[#101828] overflow-x-hidden">
-        <div className="container mx-auto pt-28 px-4 py-16 md:py-24">
+        <div className=" mx-auto pt-28 px-4 py-16 md:py-24 ">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

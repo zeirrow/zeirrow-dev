@@ -30,15 +30,19 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-{/* Glass overlay when testimonials are empty */}
-{testimonials.length === 0 && (
-  <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 backdrop-blur-md rounded-2xl">
-    <div className="text-center px-6">
-      <h3 className="text-2xl md:text-3xl font-semibold text-white mb-2">Client feedback coming soon 💬</h3>
-      <p className="text-gray-300">Hang tight! Real testimonials will be shared after launch.</p>
-    </div>
-  </div>
-)}
+        {/* Glass overlay when testimonials are empty */}
+        {testimonials.length === 0 && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 backdrop-blur-md rounded-2xl">
+            <div className="text-center px-6">
+              <h3 className="text-2xl md:text-3xl font-semibold text-white mb-2">
+                Client feedback coming soon 💬
+              </h3>
+              <p className="text-gray-300">
+                Hang tight! Real testimonials will be shared after launch.
+              </p>
+            </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (

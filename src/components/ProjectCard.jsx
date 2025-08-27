@@ -21,7 +21,7 @@ const ProjectCard = ({ project, index }) => {
       animate={inView ? "visible" : "hidden"}
       custom={isEven}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full md:w-[1000px] mx-auto relative"
+      className="w-full max-w-4xl mx-auto relative"
     >
       {/* Animated Neon Border */}
       <div className="absolute -inset-0.5 rounded-lg overflow-hidden z-0">

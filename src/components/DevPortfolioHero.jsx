@@ -14,7 +14,7 @@ import { IoStatsChartSharp } from "react-icons/io5";
 
 const DevPortfolioHero = () => {
   // Memoize these values since they don't change
-  const yearsOfExperience = useMemo(() => new Date().getFullYear() - 2023, []);
+  const yearsOfExperience = useMemo(() => new Date().getFullYear() - 2022, []);
   const numOfProjects = useMemo(() => projects.length, []);
   const [firstName, lastName] = useMemo(() => myInfo.name.split(" "), []);
   const { email, linkedIn, twitter } = useMemo(() => myInfo.contact, []);
@@ -120,7 +120,7 @@ const DevPortfolioHero = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              React Developer
+              A React Developer
             </motion.h2>
 
             <motion.p
@@ -209,8 +209,6 @@ const DevPortfolioHero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="flex-1 flex justify-center lg:justify-end relative"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
           >
             <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
               {/* Profile Image */}
@@ -218,6 +216,8 @@ const DevPortfolioHero = () => {
                 <motion.div
                   key={imgSrc}
                   initial={{ opacity: 0, scale: 0.9 }}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
                   animate={{
                     opacity: 1,
                     scale: 1,

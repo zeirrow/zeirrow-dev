@@ -18,7 +18,14 @@ import {
 
 export const github = "https://github.com/zeirrow";
 
-export const allSections = ["home", "projects", "about", "faqs", "contact"];
+export const allSections = [
+  "home",
+  "projects",
+  "about",
+  "faqs",
+  "contact",
+  "blog",
+];
 
 let projectId = 0;
 
@@ -63,7 +70,7 @@ export const projects = [
     id: projectId++,
     title: "Plumbing Solutions That Flow",
     description: "A slick landing page for a plumbing company.",
-    tech: ["React", "Tailwind"],
+    tech: ["Next.js", "Tailwind", "Framer Motion", "GSAP"],
     github: `${github}/plumber`,
     live: "https://plumber-kappa.vercel.app/",
     screenshot: "/screenshots/plumber-1.png",

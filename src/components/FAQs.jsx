@@ -24,7 +24,7 @@ const FAQs = () => {
           >
             <motion.button
               onClick={() => toggle(index)}
-              className="w-full flex justify-between items-center px-6 py-4 text-left text-lg font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 transition"
+              className="w-full flex justify-between items-center px-6 py-4 text-left text-lg font-medium hover:bg-zinc-100 dark:hover:bg-gradient-to-r from-cyan-500 to-blue-600 transition"
               whileTap={{ scale: 0.98 }} // Click feedback
             >
               <span>{faq.question}</span>
@@ -32,7 +32,7 @@ const FAQs = () => {
                 animate={{ rotate: openIndex === index ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
               >
-                {openIndex === index ? <BiChevronUp /> : <BiChevronDown />}
+                {openIndex ? <BiChevronUp /> : <BiChevronDown />}
               </motion.span>
             </motion.button>
 

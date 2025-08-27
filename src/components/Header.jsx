@@ -4,8 +4,11 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { allSections, myInfo } from "../../data/data";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Header = ({ activeSection }) => {
+  const pathname = usePathname();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ref = useOutsideClick(() => setIsMenuOpen(false));
@@ -47,22 +50,29 @@ const Header = ({ activeSection }) => {
         </Link>
 
         {/* Desktop Navigation */}
+        {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">
-          {allSections.map((item) => (
-            <motion.a
-              key={item}
-              href={`#${item}`}
-              className={`capitalize text-sm font-medium transition-colors ${
-                activeSection === item
-                  ? "text-cyan-400"
-                  : "text-gray-400 hover:text-white"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {item}
-            </motion.a>
-          ))}
+          {allSections.map((item) => {
+            const isBlog = item.toLowerCase() === "blog"; // special case
+            return (
+              <motion.div
+                key={item}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  href={isBlog ? "/blog" : `/#${item}`}
+                  className={`capitalize text-sm font-medium transition-colors ${
+                    activeSection === item
+                      ? "text-cyan-400"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  {item}
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Mobile Menu Button */}
@@ -106,22 +116,28 @@ const Header = ({ activeSection }) => {
               className="md:hidden absolute top-full left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800"
             >
               <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
-                {allSections.map((item) => (
-                  <motion.a
-                    key={item}
-                    href={`#${item}`}
-                    onClick={handleNavClick}
-                    className={`capitalize py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                      activeSection === item
-                        ? "bg-gray-800 text-cyan-400"
-                        : "text-gray-400 hover:bg-gray-800 hover:text-white"
-                    }`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {item}
-                  </motion.a>
-                ))}
+                {allSections.map((item) => {
+                  const isBlog = item.toLowerCase() === "blog"; // special case
+                  return (
+                    <motion.div
+                      key={item}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Link
+                        href={isBlog ? "/blog" : `/#${item}`}
+                        onClick={handleNavClick}
+                        className={`capitalize py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                          activeSection === item
+                            ? "bg-gray-800 text-cyan-400"
+                            : "text-gray-400 hover:bg-gray-800 hover:text-white"
+                        }`}
+                      >
+                        {item}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
 
                 <div className="flex items-center justify-between pt-4 border-t border-gray-800">
                   {/* <button
