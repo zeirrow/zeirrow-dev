@@ -11,33 +11,32 @@ import {
 } from "react-icons/lu";
 import { github, myInfo, projects } from "../../data/data";
 import { IoStatsChartSharp } from "react-icons/io5";
+import JScript from "./JScript";
+
+const yearsOfExperience = new Date().getFullYear() - 2022;
+const [firstName, lastName] = myInfo.name.split(" ");
+const numOfProjects = projects.length;
+const { email, linkedIn, twitter } = myInfo.contact;
+
 
 const DevPortfolioHero = () => {
   // Memoize these values since they don't change
-  const yearsOfExperience = useMemo(() => new Date().getFullYear() - 2022, []);
-  const numOfProjects = useMemo(() => projects.length, []);
-  const [firstName, lastName] = useMemo(() => myInfo.name.split(" "), []);
-  const { email, linkedIn, twitter } = useMemo(() => myInfo.contact, []);
-
   // State
   const [imgSrc, setImgSrc] = useState(myInfo.mobImage);
   const [isHovering, setIsHovering] = useState(false);
   const [forceDownload, setForceDownload] = useState(false);
 
   // Social links - memoized
-  const socialLinks = useMemo(
-    () => [
+  const socialLinks = [
       { icon: <LuGithub size={20} />, href: github },
       { icon: <LuLinkedin size={20} />, href: linkedIn },
       { icon: <LuMail size={20} />, href: `mailto:${email}` },
       { icon: <LuTwitter size={20} />, href: twitter },
-    ],
-    [email, github, linkedIn, twitter]
-  );
+    ]
+  
 
   // Stats data - memoized
-  const stats = useMemo(
-    () => [
+  const stats = [
       {
         value: `${yearsOfExperience}+`,
         label: "Years Experience",
@@ -54,10 +53,8 @@ const DevPortfolioHero = () => {
         color: "text-purple-400",
       },
       { value: "🟢", label: "Available", color: "text-green-400" },
-    ],
-    [yearsOfExperience, numOfProjects]
-  );
-
+    ]
+    
   // Handlers - memoized
   const handleMouseEnter = useCallback(() => {
     setImgSrc(myInfo.mobArt);
@@ -69,14 +66,34 @@ const DevPortfolioHero = () => {
     setIsHovering(false);
   }, []);
 
+  // Watch Shift key in real-time
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Shift") setForceDownload(true);
+    };
+    const handleKeyUp = (e) => {
+      if (e.key === "Shift") setForceDownload(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
+  // Handle click logic
   const handleResumeClick = (e) => {
-    if (e.shiftKey) {
-      // If Shift is held, force download
-      setForceDownload(true);
-    } else {
-      // If normal click, just open the PDF
-      setForceDownload(false);
+    if (forceDownload) {
+      e.preventDefault(); // stop Next.js <Link> navigation
+      const link = document.createElement("a");
+      link.href = "/files/resume.pdf";
+      link.download = "resume.pdf";
+      link.click();
     }
+    // else: let Link do its normal job (open in browser)
   };
 
   return (
@@ -205,18 +222,19 @@ const DevPortfolioHero = () => {
                   whileTap={{ scale: 0.95 }}
                   href="/files/resume.pdf"
                   target="_blank"
-                  download={forceDownload ? true : undefined}
                   onClick={handleResumeClick}
                   className="flex items-center justify-center space-x-2 px-6 py-3 border border-gray-600 hover:bg-gray-800 rounded-lg transition-colors"
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <LuDownload size={18} />
-                  <span className="hidden md:block">{forceDownload ? "Download": "See"} my resume!</span>
+                  <span className="hidden md:block">
+                    {forceDownload ? "Download" : "See"} my resume!
+                  </span>
                   <span className="md:hidden">See resume!</span>
                 </motion.a>
                 {/* Tooltip */}
                 <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:md:block bg-gray-800 text-white text-xs px-2 py-1 rounded-md whitespace-nowrap">
-                  Hold Shift + Click to download
+                  {forceDownload ? "" : "Hold Shift + "}Click to download
                 </span>
               </div>
             </motion.div>
@@ -357,15 +375,6 @@ const DevPortfolioHero = () => {
         </motion.div>
       </div>
     </div>
-  );
-};
-
-const JScript = () => {
-  return (
-    <>
-      <span>Java</span>
-      <span className="text-black bg-yellow-500 rounded-lg px-0.5">Script</span>
-    </>
   );
 };
 
