@@ -56,8 +56,8 @@ const Home = () => {
       />
 
       <DevPortfolioHero />
-      <ProjectSection />
       <About />
+      <ProjectSection />
       <Testimonials />
       <FAQs />
       <Contact />

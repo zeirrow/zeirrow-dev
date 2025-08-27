@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 const Header = ({ activeSection }) => {
   const pathname = usePathname();
-
+  const [forceDownload, setForceDownload] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ref = useOutsideClick(() => setIsMenuOpen(false));
@@ -27,6 +27,36 @@ const Header = ({ activeSection }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Watch Shift key in real-time
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Shift") setForceDownload(true);
+    };
+    const handleKeyUp = (e) => {
+      if (e.key === "Shift") setForceDownload(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
+  // Handle click logic
+  const handleResumeClick = (e) => {
+    if (forceDownload) {
+      e.preventDefault(); // stop Next.js <Link> navigation
+      const link = document.createElement("a");
+      link.href = "/files/resume.pdf";
+      link.download = "resume.pdf";
+      link.click();
+    }
+    // else: let Link do its normal job (open in browser)
+  };
 
   return (
     <header
@@ -93,15 +123,24 @@ const Header = ({ activeSection }) => {
           >
             {darkMode ? "☀️" : "🌙"}
           </button> */}
-          <Link href="#contact">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium shadow-lg hover:shadow-cyan-500/30 transition-all"
-            >
-              Hire Me
-            </motion.span>
-          </Link>
+          <motion.a
+            href="/files/resume.pdf"
+            target="_blank"
+            onClick={handleResumeClick}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative group inline-block px-4 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium shadow-lg hover:shadow-cyan-500/30 transition-all"
+          >
+            <span className="hidden md:block">
+              {forceDownload ? "Download" : "See"} my resume!
+            </span>
+            <span className="md:hidden">See resume!</span>
+
+            {/* Tooltip */}
+            <span className="absolute top-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:md:block bg-gray-800 text-white text-xs px-2 py-1 rounded-md whitespace-nowrap">
+              {forceDownload ? "" : "Hold Shift + "}Click to download
+            </span>
+          </motion.a>
         </div>
 
         {/* Mobile Menu */}
@@ -150,7 +189,7 @@ const Header = ({ activeSection }) => {
                   >
                     {darkMode ? "☀️" : "🌙"}
                   </button> */}
-                  <Link href="#contact">
+                  <a href="/files/resume.pdf" target="_blank">
                     <motion.span
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -159,7 +198,7 @@ const Header = ({ activeSection }) => {
                     >
                       Hire Me
                     </motion.span>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>
