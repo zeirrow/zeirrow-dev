@@ -69,20 +69,12 @@ export const projects = [
   {
     id: projectId++,
     title: "Plumbing Solutions That Flow",
-    description: "A slick landing page for a plumbing company.",
+    description:
+      "A responsive landing page project for a plumbing company, designed to explore clean layouts and motion-driven user interfaces. The build demonstrates integration of Next.js, Tailwind, Framer Motion, and GSAP for smooth animations and modern UI patterns.",
     tech: ["Next.js", "Tailwind", "Framer Motion", "GSAP"],
     github: `${github}/plumber`,
     live: "https://plumber-kappa.vercel.app/",
     screenshot: "/screenshots/plumber-1.png",
-  },
-  {
-    id: projectId++,
-    title: "Your Plumber",
-    description: "A slick landing page for a plumbing company.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    github: `${github}/plumber-2`,
-    live: "https://zeirrow.github.io/plumber-2",
-    screenshot: "/screenshots/plumber-2.png",
   },
   {
     id: projectId++,
@@ -92,6 +84,26 @@ export const projects = [
     github: `${github}/cinemate`,
     live: "https://cinemate-sepia.vercel.app",
     screenshot: "/screenshots/cinemate.png",
+  },
+  {
+    id: projectId++,
+    title: "Style Street",
+    description:
+      "A sleek and fully functional e-commerce platform designed specifically for boutiques — crafted to showcase collections with elegance, streamline product browsing, and provide customers with a seamless shopping experience from discovery to checkout.",
+    tech: ["React", "Tailwind CSS", "TypeScript"],
+    github: `${github}/Style-Street`,
+    live: "https://style-street-olive.vercel.app",
+    screenshot: "/screenshots/style-street.png",
+  },
+  {
+    id: projectId++,
+    title: "Your Plumber",
+    description:
+      "A landing page built as a practice project for service-based businesses. Focused on responsive design, semantic structure, and performance, while showcasing how CSS and vanilla JavaScript can deliver a professional digital presence.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    github: `${github}/plumber-2`,
+    live: "https://zeirrow.github.io/plumber-2",
+    screenshot: "/screenshots/plumber-2.png",
   },
   {
     id: projectId++,
@@ -131,6 +143,26 @@ export const projects = [
     github: `${github}/pizza-delivery`,
     live: "https://pizza-menu-app-bay.vercel.app/",
     screenshot: "/screenshots/fast-pizza.png",
+  },
+  {
+    id: projectId++,
+    title: "Signature Plumbing & Heating",
+    description:
+      "A front-end landing page project built to experiment with utility-first styling and lightweight JavaScript interactions. Emphasis was placed on clarity of service presentation and a conversion-friendly structure, using Tailwind CSS for rapid prototyping.",
+    tech: ["HTML", "Tailwind CSS", "JavaScript"],
+    github: `${github}/plumber-3`,
+    live: "https://zeirrow.github.io/plumber-3",
+    screenshot: "/screenshots/signature-plumbing-&-heating.png",
+  },
+  {
+    id: projectId++,
+    title: "PlumbFix",
+    description:
+      "A modern plumbing company landing page designed to showcase responsive design techniques and smooth section-based layouts. This project highlights best practices in accessibility and front-end performance optimization with HTML, Tailwind, and JavaScript.",
+    tech: ["HTML", "Tailwind CSS", "JavaScript"],
+    github: `${github}/plumber-4`,
+    live: "https://zeirrow.github.io/plumber-4",
+    screenshot: "/screenshots/PlumbFix.png",
   },
 ];
 

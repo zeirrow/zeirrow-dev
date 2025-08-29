@@ -124,7 +124,7 @@ const ProjectSection = () => {
         >
           <Link href="/projects">
             <span className="text-cyan-400 hover:underline">
-              View All Projects
+              See more
             </span>
           </Link>
         </motion.div>
