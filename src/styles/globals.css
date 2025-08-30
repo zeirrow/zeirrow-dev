@@ -3,6 +3,7 @@
 * {
   scroll-behavior: smooth;
   outline: none;
+  scrollbar-width: none;
 }
 
 body {

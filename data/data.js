@@ -75,6 +75,7 @@ export const projects = [
     github: `${github}/plumber`,
     live: "https://plumber-kappa.vercel.app/",
     screenshot: "/screenshots/plumber-1.png",
+    category: "plumbing",
   },
   {
     id: projectId++,
@@ -84,6 +85,7 @@ export const projects = [
     github: `${github}/cinemate`,
     live: "https://cinemate-sepia.vercel.app",
     screenshot: "/screenshots/cinemate.png",
+    category: "entertainment",
   },
   {
     id: projectId++,
@@ -94,6 +96,7 @@ export const projects = [
     github: `${github}/Style-Street`,
     live: "https://style-street-olive.vercel.app",
     screenshot: "/screenshots/style-street.png",
+    category: "ecommerce",
   },
   {
     id: projectId++,
@@ -104,6 +107,7 @@ export const projects = [
     github: `${github}/plumber-2`,
     live: "https://zeirrow.github.io/plumber-2",
     screenshot: "/screenshots/plumber-2.png",
+    category: "plumbing",
   },
   {
     id: projectId++,
@@ -113,6 +117,7 @@ export const projects = [
     github: `${github}/lumina`,
     live: "https://lumina-jade.vercel.app/",
     screenshot: "/screenshots/lumina.png",
+    category: "skin-care",
   },
   {
     id: projectId++,
@@ -123,6 +128,7 @@ export const projects = [
     github: `${github}/codetovideo`,
     live: "https://code-to-video.vercel.app/",
     screenshot: "/screenshots/code2video.png",
+    category: "productivity",
   },
   {
     id: projectId++,
@@ -133,6 +139,7 @@ export const projects = [
     github: `${github}/task-flow`,
     live: "https://task-flow-beta-pearl.vercel.app/",
     screenshot: "/screenshots/taskFlow.png",
+    category: "productivity",
   },
   {
     id: projectId++,
@@ -143,6 +150,7 @@ export const projects = [
     github: `${github}/pizza-delivery`,
     live: "https://pizza-menu-app-bay.vercel.app/",
     screenshot: "/screenshots/fast-pizza.png",
+    category: "ecommerce",
   },
   {
     id: projectId++,
@@ -153,6 +161,7 @@ export const projects = [
     github: `${github}/plumber-3`,
     live: "https://zeirrow.github.io/plumber-3",
     screenshot: "/screenshots/signature-plumbing-&-heating.png",
+    category: "plumbing",
   },
   {
     id: projectId++,
@@ -163,6 +172,7 @@ export const projects = [
     github: `${github}/plumber-4`,
     live: "https://zeirrow.github.io/plumber-4",
     screenshot: "/screenshots/PlumbFix.png",
+    category: "plumbing",
   },
 ];
 
