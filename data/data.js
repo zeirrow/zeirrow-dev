@@ -28,6 +28,7 @@ export const allSections = [
 ];
 
 let projectId = 0;
+let googleReviewId = 0;
 
 export const myInfo = {
   name: "Nnodimele Udodirim",
@@ -238,10 +239,40 @@ export const testimonials = [
     name: "Leila Omotayo",
     role: "MD, Air Crew",
     quote:
-      "We’ve worked with devs before, but this was the first time the frontend actually *felt* like design. It just clicked.",
+      "We've worked with devs before, but this was the first time the frontend actually *felt* like design. It just clicked.",
     image: "/client-work/plumbing.png",
     emoji: "✨",
     color: "bg-pink-500/10",
+  },
+];
+
+export const googleReviews = [
+  {
+    googleReviewId: googleReviewId++,
+    author_name: "Jane Doe",
+    profile_photo_url: "/client-work/plumbing.png",
+    rating: 5,
+    relative_time_description: "a month ago",
+    text: "Working with Wisdom was a game changer. Every component felt intentional — no fluff, just sharp execution.",
+    time: 1680312321,
+  },
+  {
+    googleReviewId: googleReviewId++,
+    author_name: "John Smith",
+    profile_photo_url: "/client-work/AIverse.png",
+    rating: 4,
+    relative_time_description: "2 months ago",
+    text: "Dude took our chaotic wireframes and turned them into a sleek, pixel-perfect UI. Clients noticed immediately.",
+    time: 1677624321,
+  },
+  {
+    googleReviewId: googleReviewId++,
+    author_name: "Alice Johnson",
+    profile_photo_url: "/client-work/cloth.png",
+    rating: 5,
+    relative_time_description: "3 weeks ago",
+    text: "We've worked with devs before, but this was the first time the frontend actually *felt* like design. It just clicked.",
+    time: 1682912321,
   },
 ];
 
