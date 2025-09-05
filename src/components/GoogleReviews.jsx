@@ -1,19 +1,27 @@
 // Enhanced GoogleReviewCard component
 import Image from "next/image";
+import { truncate } from "../utils/helper";
+import { useState } from "react";
 
+const truncateAt = 120; // Number of characters to show before truncating
 const GoogleReviewCard = ({ testimonial }) => {
   const {
-    Name: author_name,
-    Timestamp: relative_time_description,
-    Rating: rating,
-    Comments: text,
+    name,
+    businessName: relative_time_description,
+    rating,
+    comments: text,
   } = testimonial;
-  console.log("testimonial data in GoogleReviewCard:", testimonial);
+
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div
-      className="h-full p-6 rounded-xl bg-gradient-to-b from-gray-800 to-gray-900 border border-gray-700 
-                 shadow-lg flex flex-col gap-4 transition-all duration-300 hover:border-cyan-400/40
-                 hover:shadow-cyan-400/10 group"
+    <div 
+      className={`h-full p-6 rounded-xl bg-gradient-to-b from-gray-800 to-gray-900 border border-gray-700 
+                 shadow-lg flex flex-col gap-4 transition-all duration-300 
+                 hover:border-cyan-400/40 hover:shadow-cyan-400/10 group
+                 ${isHovered ? 'backdrop-blur-sm' : ''}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Header section */}
       <div className="flex justify-between items-start">
@@ -22,16 +30,21 @@ const GoogleReviewCard = ({ testimonial }) => {
           <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-cyan-400/20 group-hover:border-cyan-400/40 transition-colors">
             <Image
               src="/images/avatar.png"
-              alt={author_name}
+              alt={name}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 44px, 44px"
             />
           </div>
           <div>
-            <h4 className="font-semibold text-white capitalize">{author_name}</h4>
-            <p className="text-gray-400 text-xs mt-0.5">
-              {relative_time_description}
+            <h4 title={name} className="font-semibold text-white capitalize">
+              {truncate(name, 15)}
+            </h4>
+            <p
+              title={relative_time_description}
+              className="text-gray-400 text-xs mt-0.5"
+            >
+              {truncate(relative_time_description, 20)}
             </p>
           </div>
         </div>
@@ -68,13 +81,32 @@ const GoogleReviewCard = ({ testimonial }) => {
         ))}
       </div>
 
-      {/* Review Text */}
-      <p className="text-gray-300 text-sm md:text-base leading-relaxed flex-grow line-clamp-5">
-        "{text}"
-      </p>
+      {/* Review Text with Tooltip */}
+      <div className="relative">
+        <p className="text-gray-300 text-sm md:text-base leading-relaxed flex-grow line-clamp-5">
+          "{truncate(text, truncateAt)}"
+        </p>
+        
+        {text && text.length > truncateAt && (
+          <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:backdrop-blur-sm transition-all duration-200">
+            <span
+              className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-full 
+                       opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out
+                       bg-gray-900/95 backdrop-blur-md text-white text-sm px-4 py-3 rounded-lg w-[320px] 
+                       text-left break-words whitespace-normal shadow-2xl border border-gray-600/50
+                        z-[4000]
+                       before:content-[''] before:absolute before:top-full before:left-1/2 
+                       before:-translate-x-1/2 before:border-8 before:border-transparent 
+                       before:border-t-gray-900/95"
+            >
+              {text}
+            </span>
+          </div>
+        )}
+      </div>
 
       {/* Read more indicator */}
-      {text && text.length > 200 && (
+      {text && text.length > truncateAt && (
         <div className="pt-2">
           <span className="text-cyan-400 text-xs font-medium inline-flex items-center">
             Read full review

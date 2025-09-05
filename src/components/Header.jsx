@@ -80,7 +80,6 @@ const Header = ({ activeSection }) => {
         </Link>
 
         {/* Desktop Navigation */}
-        {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">
           {allSections.map((item) => {
             const isBlog = item.toLowerCase() === "blog"; // special case

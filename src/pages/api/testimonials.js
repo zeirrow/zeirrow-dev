@@ -1,4 +1,5 @@
 import { google } from "googleapis";
+import { slugify } from "../../utils/helper";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -17,7 +18,7 @@ export default async function handler(req, res) {
     const sheets = google.sheets({ version: "v4", auth });
 
     const sheetId = process.env.GOOGLE_SHEET_ID;
-    const range = "'Form Responses 1'!A:F"; // adjust to your form’s range
+    const range = "'Form Responses 1'!A:G"; // adjust to your form’s range
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
@@ -39,7 +40,8 @@ export default async function handler(req, res) {
       headers.forEach((header, index) => {
         // Only include the fields we want
         if (header !== "Email" && header !== "Phone number") {
-          obj[header] = row[index] || ""; // Handle empty cells
+          const key = slugify(header); // normalize header
+          obj[key] = row[index] || ""; // Handle empty cells
         }
       });
       return obj;

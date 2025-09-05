@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-import { googleReviews } from "../../data/data";
 import Link from "next/link";
 
 // Import Swiper
@@ -24,22 +23,24 @@ const Testimonials = () => {
         const data = await response.json();
 
         setReviews(data.data || []); // ✅ pick the array
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching testimonials:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchTestimonials();
   }, []);
-// Calculate average rating (rounded to 1 decimal place)
-const avgRating =
-  reviews && reviews.length > 0
-    ? (
-        reviews.reduce((sum, r) => sum + Number(r.Rating || 0), 0) /
-        reviews.length
-      ).toFixed(1)
-    : 0;
+
+  // Calculate average rating (rounded to 1 decimal place)
+  const avgRating =
+    reviews && reviews.length > 0
+      ? (
+          reviews.reduce((sum, r) => sum + Number(r.rating || 0), 0) /
+          reviews.length
+        ).toFixed(1)
+      : 0;
 
   return (
     <section className="relative py-20 px-4 overflow-hidden bg-[#0a0f1a]">
@@ -94,31 +95,33 @@ const avgRating =
                 </h2>
 
                 {/* Stars with rating count */}
-<div className="flex flex-col gap-2">
-  <div className="flex items-center gap-1">
-    {/* Stars */}
-    {Array.from({ length: 5 }).map((_, i) => (
-      <span
-        key={i}
-        className={`text-xl md:text-2xl ${
-          i < Math.round(avgRating) ? "text-yellow-400" : "text-gray-600"
-        }`}
-      >
-        ★
-      </span>
-    ))}
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-1">
+                    {/* Stars */}
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span
+                        key={i}
+                        className={`text-xl md:text-2xl ${
+                          i < Math.round(avgRating)
+                            ? "text-yellow-400"
+                            : "text-gray-600"
+                        }`}
+                      >
+                        ★
+                      </span>
+                    ))}
 
-    {/* Average number */}
-    <span className="ml-2 text-white font-semibold text-lg">
-      {avgRating}
-    </span>
-  </div>
+                    {/* Average number */}
+                    <span className="ml-2 text-white font-semibold text-lg">
+                      {avgRating}
+                    </span>
+                  </div>
 
-  {/* Review count */}
-  <p className="text-gray-400 text-sm">
-    Based on {reviews?.length || 0} reviews
-  </p>
-</div>
+                  {/* Review count */}
+                  <p className="text-gray-400 text-sm">
+                    Based on {reviews?.length || 0} reviews
+                  </p>
+                </div>
               </div>
 
               {/* CTA Button */}
